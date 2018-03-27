@@ -1,0 +1,14 @@
+{
+  "name": "trivia-schema",
+  "version": "0.1.0",
+  "description": "JSON Schema for interchange of trivia questions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^6.4.0"
+  }
+}
