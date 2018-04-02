@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$title</title>
+</head>
+<style>
+    .item {
+        margin: 4px 8px;
+        padding: 4px;
+        border: 2px solid black;
+        border-radius: 4px;
+    }
+    .question {
+        margin: 2px 0;
+        font-size: 110%;
+    }
+    .answer {
+        text-transform: uppercase;
+        color: crimson;
+        font-weight: bold;
+        margin: 4px 0;
+    }
+    .mmcontainer {
+        display: flex;
+        justify-content: space-around;
+    }
+    .mmcontent {
+        margin: 4px 8px;
+    }
+    .label {
+        cursor: pointer;
+    }
+</style>
+<script>
+function showAnswer (x) {
+    document.querySelector(`#label${x}`).style.display = 'none';
+    document.querySelector(`#ans${x}`).style.display = 'inline';
+}
+</script>
+<body>
+
+<h1>$title</h1>
+
+<h4>$description</h4>
+
+$content
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "title": "Shoeless Trivia Episode 83",
+  "description": "The 1960s",
+  "authors": ["Jay Bloodworth"],
+  "creationDate": "2018-03-27",
+  "items": [
+    {
+      "question": "Who is the man pictured here? In addition to the accomplishments alluded to in the image, he was also one of the people who subdued Robert Kennedy’s assassin.",
+      "answer": "Rosie Grier",
+      "multimedia": [
+        {
+        "type": "image",
+        "sources": [
+          {
+            "mimetype": "image/jpeg",
+            "uri": "http://gaufqwi.org/wp-content/uploads/2018/03/sixties1.jpg"
+          }
+        ]
+        }
+      ]
+    },
+    {
+      "question": "A 1965 work of conceptual art by Joseph Kosuth consists of a certain type of object, a life sized photograph of that object displayed to its left, and an enlarged copy of the dictionary definition of the object displayed to its right. What kind of object is featured in this piece?",
+      "answer": "chair"
+    },
+    {
+      "question": "“An Unearthly Child” was the title of the first episode of what long running sci-fi series? Its first broadcast on November 23, 1963 was overshadowed by coverage of the John F. Kennedy assassination, so it was shown again the following week.",
+      "answer": "<i>Doctor Who</i>"
+    },
+    {
+      "question": "The musical clip below refers to a historic 1961 accomplishment by whom?",
+      "answer": "Yuri Gagarin",
+      "multimedia": [
+        {
+          "type": "audio",
+          "sources": [
+            {
+              "mimetype": "audio/ogg",
+              "uri": "http://gaufqwi.org/wp-content/uploads/2018/03/sixties1.ogg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "According to the title of a 1969 book, what preteen “keeps the peace” in the town of Idaville for a mere 25 cents per day (plus expenses)?",
+      "answer": "Encyclopedia (Leroy) Brown"
+    }
+  ]
+}

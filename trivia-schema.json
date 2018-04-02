@@ -1,5 +1,369 @@
 {
-  "$schema": "http://json-schema.org/schema#",
-  "id": "https://github.com/blah",
-  "description": ""
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/gaufqwi/trivia-schema/master/trivia-schema.json",
+  "description": "JSON Schema for pub quiz style trivia questions",
+  "type": "object",
+  "properties": {
+    "title": {"type": "string"},
+    "description": {"type": "string"},
+    "keywords": {"type": "array", "items": {"type": "string"}},
+    "references": {"type": "array", "items": {"$ref": "#/definitions/reference"}},
+    "authors": {"type": "array", "items": {"$ref": "#/definitions/person"}},
+    "creationDate": {"type": "string", "format": "date"},
+    "uri": {"type": "string", "format": "uri"},
+    "styling": {"enum": ["none", "html", "bbcode"]},
+    "items": {"type": "array", "items": {"$ref": "#/definitions/item"}},
+    "multimedia": {"type": "array", "items": {"$ref": "#/definitions/multimedia"}}
+  },
+  "required": ["items"],
+  "definitions": {
+    "item": {
+      "type": "object",
+      "properties": {
+        "question": {"type": "string"},
+        "answer": {"$ref": "#/definitions/answer"},
+        "choices": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {
+                "type": "object",
+                "properties": {
+                  "text": {"type": "string"},
+                  "multimedia": {
+                    "type": "array",
+                    "items": {
+                      "oneOf": [
+                        {"$ref": "#/definitions/multimedia"},
+                        {
+                          "type": "object",
+                          "properties": {
+                            "mmref": {"type": "number"}
+                          },
+                          "required": ["mmref"]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "minProperties": 1
+              }
+            ]
+          }
+        },
+        "category": {"type": "string"},
+        "keywords": {"type": "array", "items": {"type": "string"}},
+        "difficulty": {"type": "number", "minimum": 1, "maximum": 5},
+        "references": {"type": "array", "items": {"$ref": "#/definitions/reference"}},
+        "authors": {"type": "array", "items": {"$ref": "#/definitions/person"}},
+        "creationDate": {"type": "string", "format": "date"},
+        "uri": {"type": "string", "format": "uri"},
+        "bonuses": {"type": "array", "items": {"$ref": "#/definitions/item"}},
+        "multimedia": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/multimedia"},
+              {
+                "type": "object",
+                "properties": {
+                  "mmref": {"type": "number"}
+                },
+                "required": ["mmref"]
+              }
+            ]
+          }
+        }
+      },
+      "required": ["question", "answer"]
+    },
+    "person": {
+      "oneOf": [
+        {"type": "string"},
+        {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "email": {"type": "string", "format": "email"},
+            "website": {"type": "string", "format": "uri"},
+            "facebook": {"type": "string"},
+            "twitter": {"type": "string"},
+            "linkedin": {"type": "string"}
+          },
+          "minProperties": 1
+        }
+      ]
+    },
+    "simple-answer": {
+      "oneOf": [
+        {"type": "string"},
+        {
+          "type": "object",
+          "properties": {
+            "regex": {"type": "string", "format": "regex"}
+          },
+          "required": ["regex"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "choice": {"type": "number", "minimum": 1}
+          },
+          "required": ["choice"]
+        }
+      ]
+    },
+    "compound-answer": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "or": {"type": "array", "items": {"$ref": "#/definitions/simple-answer"}}
+          },
+          "required": ["or"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "and": {"type": "array", "items": {"$ref": "#/definitions/simple-answer"}}
+          },
+          "required": ["and"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "n": {"type": "number"},
+            "of": {"type": "array", "items": {"$ref": "#/definitions/simple-answer"}}
+          },
+          "required": ["n", "of"]
+        }
+      ]
+    },
+    "answer": {
+      "oneOf": [
+        {"$ref": "#/definitions/simple-answer"},
+        {"$ref": "#/definitions/compound-answer"}
+      ]
+    },
+    "timespec": {
+      "oneOf": [
+        {"type": "number", "minimum": 0},
+        {"type": "string", "pattern": "([0-9]+:){0,2}[0-9]+(\\.[0-9]*)"}
+      ]
+    },
+    "audio-annotation": {
+      "type": "object",
+      "properties": {
+        "start": {"$ref": "#/definitions/timespec"},
+        "stop": {"$ref": "#/definitions/timespec"},
+        "redactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {"$ref": "#/definitions/timespec"},
+              "stop": {"$ref": "#/definitions/timespec"},
+              "type": {"enum": ["silence", "bleep"]}
+            }
+          }
+        }
+      }
+    },
+    "image-annotation": {
+      "type": "object",
+      "properties": {
+        "scale": {
+          "oneOf": [
+            {"type": "number", "exclusiveMinimum": 0},
+            {
+              "type": "object",
+              "properties": {
+                "x": {"type": "number", "exclusiveMinimum": 0},
+                "y": {"type": "number", "exclusiveMinimum": 0}
+              },
+              "required": ["x", "y"]
+            }
+          ]
+        },
+        "clip": {
+          "type": "object",
+          "properties": {
+            "top": {"type": "number", "minimum": 0},
+            "left": {"type": "number", "minimum": 0},
+            "bottom": {"type": "number", "minimum": 0},
+            "right": {"type": "number", "minimum": 0}
+          },
+          "required": ["top", "left", "bottom", "right"]
+        },
+        "shapes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {"enum": ["rectangle", "ellipse"]},
+              "top": {"type": "number", "minimum": 0},
+              "left": {"type": "number", "minimum": 0},
+              "bottom": {"type": "number", "minimum": 0},
+              "right": {"type": "number", "minimum": 0},
+              "lineColor": {"type": "string"},
+              "lineWidth": {"type": "number", "minimum": 0},
+              "fillColor": {"type": "string"},
+              "alpha": {"type": "number", "minimum": 0, "maximum": 1}
+            },
+            "required": ["type", "top", "left", "bottom", "right"]
+          }
+        },
+        "arrows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "object",
+                "properties": {
+                  "x": {"type": "number", "minimum": 0},
+                  "y": {"type": "number", "minimum": 0}
+                },
+                "required": ["x", "y"]
+              },
+              "to": {
+                "type": "object",
+                "properties": {
+                  "x": {"type": "number", "minimum": 0},
+                  "y": {"type": "number", "minimum": 0}
+                },
+                "required": ["x", "y"]
+              },
+              "color": {"type": "string"}
+            },
+            "required": ["from", "to", "color"]
+          }
+        },
+        "texts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": {"type": "string"},
+              "top": {"type": "number", "minimum": 0},
+              "left": {"type": "number", "minimum": 0},
+              "color": {"type": "string"}
+            },
+            "required": ["text", "top", "left", "color"]
+          }
+        }
+      }
+    },
+    "multimedia": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {"const": "image"},
+            "label": {"type": "string"},
+            "sources": {"type": "array", "items": {"$ref": "#/definitions/image-source"}}
+          },
+          "required": ["type", "sources"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {"const": "audio"},
+            "label": {"type": "string"},
+            "sources": {"type": "array", "items": {"$ref": "#/definitions/audio-source"}}
+          },
+          "required": ["type", "sources"]
+        }
+      ]
+    },
+    "image-source": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"type": "string"},
+            "annotation": {"$ref": "#/definitions/image-annotation"},
+            "uri": {"type": "string", "format": "uri"}
+          },
+          "required": ["mimetype", "uri"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"const": "image/jpeg"},
+            "annotation": {"$ref": "#/definitions/image-annotation"},
+            "data": {"type": "string", "contentEncoding": "base64", "contentMediaType": "image/jpeg"}
+          },
+          "required": ["mimetype", "data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"const": "image/gif"},
+            "annotation": {"$ref": "#/definitions/image-annotation"},
+            "data": {"type": "string", "contentEncoding": "base64", "contentMediaType": "image/gif"}
+          },
+          "required": ["mimetype", "data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"const": "image/png"},
+            "annotation": {"$ref": "#/definitions/image-annotation"},
+            "data": {"type": "string", "contentEncoding": "base64", "contentMediaType": "image/png"}
+          },
+          "required": ["mimetype", "data"]
+        }
+      ]
+    },
+    "audio-source": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"type": "string"},
+            "annotation": {"$ref": "#/definitions/audio-annotation"},
+            "uri": {"type": "string", "format": "uri"}
+          },
+          "required": ["mimetype", "uri"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"const": "audio/ogg"},
+            "annotation": {"$ref": "#/definitions/audio-annotation"},
+            "data": {"type": "string", "contentEncoding": "base64", "contentMediaType": "audio/ogg"}
+          },
+          "required": ["mimetype", "data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mimetype": {"const": "audio/mpeg"},
+            "annotation": {"$ref": "#/definitions/audio-annotation"},
+            "data": {"type": "string", "contentEncoding": "base64", "contentMediaType": "audio/mpeg"}
+          },
+          "required": ["mimetype", "data"]
+        }
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "type": {"enum": ["webpage", "book", "article"]},
+        "title": {"type": "string"},
+        "uri": {"type": "string", "format": "uri"},
+        "authors": {"type": "array", "items": {"type": "string"}},
+        "vol": {"type": ["number", "string"]},
+        "number": {"type": ["number", "string"]},
+        "page": {
+          "oneOf": [
+            {"type": "number"},
+            {"type": "array", "items": [{"type": "number"}, {"type": "number"}]}
+          ]
+        }
+      }
+    }
+  }
 }
