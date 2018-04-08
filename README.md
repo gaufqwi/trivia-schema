@@ -20,7 +20,7 @@ The format makes no assumptions that the questions represented by a document for
 
 Property | Description | Required
 ---------|-------------|---------
-`"styling"` | Syntax used for multimedia styling, either `"html"` (default) or `"bbcode"` or `"none"` | N
+`"styling"` | Syntax used for multimedia styling, either `"html"` (default), `"bbcode"`, `"markdown"`, or `"none"` | N
 `"items"` | Set of questions (array of item objects - see below) | Y
 `"multimedia"` | Array of multimedia objects that can be referenced from items | N
 `"references"` | Source materials for this set of questions (array of reference objects - see below) | N

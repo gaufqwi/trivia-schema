@@ -4,7 +4,7 @@
   "description": "JSON Schema for pub quiz style trivia questions",
   "type": "object",
   "properties": {
-    "styling": {"enum": ["none", "html", "bbcode"]},
+    "styling": {"enum": ["none", "html", "bbcode", "markdown"]},
     "items": {"type": "array", "items": {"$ref": "#/definitions/item"}},
     "multimedia": {"type": "array", "items": {"$ref": "#/definitions/multimedia"}},
     "references": {"type": "array", "items": {"$ref": "#/definitions/reference"}},
