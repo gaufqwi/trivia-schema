@@ -4,19 +4,29 @@
   "description": "JSON Schema for pub quiz style trivia questions",
   "type": "object",
   "properties": {
-    "title": {"type": "string"},
-    "description": {"type": "string"},
-    "keywords": {"type": "array", "items": {"type": "string"}},
-    "references": {"type": "array", "items": {"$ref": "#/definitions/reference"}},
-    "authors": {"type": "array", "items": {"$ref": "#/definitions/person"}},
-    "creationDate": {"type": "string", "format": "date"},
-    "uri": {"type": "string", "format": "uri"},
     "styling": {"enum": ["none", "html", "bbcode"]},
     "items": {"type": "array", "items": {"$ref": "#/definitions/item"}},
-    "multimedia": {"type": "array", "items": {"$ref": "#/definitions/multimedia"}}
+    "multimedia": {"type": "array", "items": {"$ref": "#/definitions/multimedia"}},
+    "references": {"type": "array", "items": {"$ref": "#/definitions/reference"}},
+    "meta": {"$ref": "#/definitions/meta"}
   },
   "required": ["items"],
   "definitions": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "source": {"type": "string"},
+        "venue": {"type": "string"},
+        "category": {"type": "string"},
+        "difficulty": {"type": "number", "minimum": 1, "maximum": 5},
+        "keywords": {"type": "array", "items": {"type": "string"}},
+        "authors": {"type": "array", "items": {"$ref": "#/definitions/person"}},
+        "creationDate": {"type": "string", "format": "date"},
+        "uri": {"type": "string", "format": "uri"}
+      }
+    },
     "item": {
       "type": "object",
       "properties": {
@@ -52,13 +62,8 @@
             ]
           }
         },
-        "category": {"type": "string"},
-        "keywords": {"type": "array", "items": {"type": "string"}},
-        "difficulty": {"type": "number", "minimum": 1, "maximum": 5},
+        "meta": {"$ref": "#/definitions/meta"},
         "references": {"type": "array", "items": {"$ref": "#/definitions/reference"}},
-        "authors": {"type": "array", "items": {"$ref": "#/definitions/person"}},
-        "creationDate": {"type": "string", "format": "date"},
-        "uri": {"type": "string", "format": "uri"},
         "bonuses": {"type": "array", "items": {"$ref": "#/definitions/item"}},
         "multimedia": {
           "type": "array",

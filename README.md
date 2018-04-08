@@ -16,20 +16,30 @@ If a property is fairly self explanatory only its type will be described in the 
 
 ### Top Level Object
 
-The format makes no assumptions that the questions represented by a document form a semantic grouping like a "round" or "game" or whatever, but the fields are there to describe that if you wish.
+The format makes no assumptions that the questions represented by a document form a semantic grouping like a "round" or "game". Use the `"meta"` property to document that if you wish.
+
+Property | Description | Required
+---------|-------------|---------
+`"styling"` | Syntax used for multimedia styling, either `"html"` (default) or `"bbcode"` or `"none"` | N
+`"items"` | Set of questions (array of item objects - see below) | Y
+`"multimedia"` | Array of multimedia objects that can be referenced from items | N
+`"references"` | Source materials for this set of questions (array of reference objects - see below) | N
+`"meta"`|Descriptive information about this set of items. Semantics are largely user/application defined (meta object - see below)|N
+
+### Meta Object
 
 Property | Description | Required
 ---------|-------------|---------
 `"title"` | (string) | N
 `"description"` | (string) | N
+`"category`|(string)|N
+`"difficulty"`|Estimate of difficulty (number between 1 and 5 inclusive)|N
+`"source"` | (string) | N
+`"venue"` | (string) | N
 `"keywords"` | Short tags for categorizing this set (array of strings) |N
-`"references"` | Source materials for this set of questions (array of reference objects - see below) | N
 `"authors"` | (array of strings or person objects - see below) | N
 `"creationDate"` | (string - YYYY-MM-DD) | N
-`"uri"` | Canonical URI (REST style) where this set of questions can be located (string) | N
-`"styling"` | Syntax used for multimedia styling, either `"html"` (default) or `"bbcode"` or `"none"` | N
-`"items"` | Set of questions (array of item objects - see below) | Y
-`"multimedia"` | Array of multimedia objects that can be referenced from items | N
+`"uri"` | Canonical URI (REST style) where this question or set can be located (string) | N
 
 ### Item Object
 
@@ -40,12 +50,8 @@ Property | Description | Required
 `"question"` | Text of question, formatted based on top-level `"styling"` property | N
 `"answer"` | Answer to question (string or answer object - see below) | Y
 `"choices"` | Answer choices for multiple choice style questions (array of strings or choice objects - see below) | N
-`"keywords"` | Short tags for categorizing this set (array of strings) |N
-`"difficulty"` | Estimate of question difficulty (number between 1 and 5 inclusive)
+`"meta"`|Descriptive information about this item. Semantics are largely user/application defined (meta object - see above)|N
 `"references"` | Source materials for this set of questions (array of reference objects - see below) | N
-`"authors"` | (array of strings or person objects - see below) | N
-`"creationDate"` | (string - YYYY-MM-DD) | N
-`"uri"` | Canonical URI (REST style) where this set of questions can be located (string) | N
 `"bonuses"` | Set of bonus items linked to this one. The spec doesn't prohibit arbitrary recursion, but don't do it (array of item objects)| N
 `"multimedia"` | Any multimedia (images or audio) linked to this question. Array where the entries are either multimedia objects as described below or simple objects with a single property `"mmref"` which is a (zero-based) index into the top level `"multimedia"` array. (as described) | N
 

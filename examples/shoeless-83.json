@@ -1,8 +1,12 @@
 {
   "title": "Shoeless Trivia Episode 83",
-  "description": "The 1960s",
-  "authors": ["Jay Bloodworth"],
-  "creationDate": "2018-03-27",
+  "meta": {
+    "description": "The 1960s",
+    "authors": [
+      "Jay Bloodworth"
+    ],
+    "creationDate": "2018-03-27"
+  },
   "items": [
     {
       "question": "Who is the man pictured here? In addition to the accomplishments alluded to in the image, he was also one of the people who subdued Robert Kennedy’s assassin.",

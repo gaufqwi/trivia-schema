@@ -1,34 +1,38 @@
 {
   "title": "Shoeless Trivia Episode 81",
-  "description": "A Day in the Life of Marlon Bundo",
-  "authors": ["Jay Bloodworth"],
-  "creationDate": "2018-03-25",
+  "meta": {
+    "description": "A Day in the Life of Marlon Bundo",
+    "authors": [
+      "Jay Bloodworth"
+    ],
+    "creationDate": "2018-03-25"
+  },
   "items": [
     {
       "question": "Marlon Brando was nominated twice (and won once) during the 1990s for the Golden Raspberry Award for Worst Supporting Actor. Name either film for which he was nominated.",
       "answer": {"or": ["<i>The Island of Dr. Moreau</i>", "<i>Christopher Columbus: The Discovery</i>"]},
-      "category": "FILM"
+      "meta": {"category": "FILM"}
     },
     {
       "question": "A 1202 arithmetic book by Leonardo of Pisa (better known by a nickname) describes and solves the problem of the growth of an idealized population of rabbits. The solution to this problem, which has important applications outside of lagomorph husbandry, is known as what?",
       "answer": "Fibonacci sequence",
-      "category": "MATH"
+      "meta": {"category": "MATH"}
     },
     {
       "question": "Name either of the two men in the foreground of the image below, one whose face has been obscured. ",
       "answer": {"or": ["Paul Simon", "Paul Simon"]},
-      "category": "AMER HISTORY",
+      "meta": {"category": "AMER HISTORY"},
       "multimedia": [{"mmref": 0}]
     },
     {
       "question": "What hefty work, first published serially from 1918 to 1920 and then in its entirety in 1922, describes a day in the life of Leopold Bloom – June 16, 1904, to be precise?",
       "answer": "<i>Ulyssses</i>",
-      "category": "LITERATURE"
+      "meta": {"category": "LITERATURE"}
     },
     {
       "question": "The second season of Disney’s <i>Andi Mack</i> drew headlines for featuring an unrequited crush of one middle school aged boy on another. Hopeful shippers have dubbed this pairing “Jyrus”. What are the first names of both the crusher and the crushee?",
       "answer": {"and": ["Jonah", "Cyrus"]},
-      "category": "TELEVISION"
+      "meta": {"category": "TELEVISION"}
     }
   ],
   "multimedia": [
