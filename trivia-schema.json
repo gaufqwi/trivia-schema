@@ -19,7 +19,12 @@
         "description": {"type": "string"},
         "source": {"type": "string"},
         "venue": {"type": "string"},
-        "category": {"type": "string"},
+        "category": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "array", "items": {"type": "string"}}
+          ]
+        },
         "difficulty": {"type": "number", "minimum": 1, "maximum": 5},
         "keywords": {"type": "array", "items": {"type": "string"}},
         "authors": {"type": "array", "items": {"$ref": "#/definitions/person"}},

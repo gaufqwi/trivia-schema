@@ -32,7 +32,7 @@ Property | Description | Required
 ---------|-------------|---------
 `"title"` | (string) | N
 `"description"` | (string) | N
-`"category`|(string)|N
+`"category"`|(string or array of strings)|N
 `"difficulty"`|Estimate of difficulty (number between 1 and 5 inclusive)|N
 `"source"` | (string) | N
 `"venue"` | (string) | N
@@ -118,7 +118,7 @@ Property | Description | Required
 `"website"` | (string) | N
 `"facebook"` | (string) | N
 `"twitter"` | (string) | N
-`"linkedin` | (string) | N
+`"linkedin"` | (string) | N
 
 ### Reference Object
 
@@ -129,7 +129,7 @@ Property | Description | Required
 `"uri"` | (string) | N
 `"vol"` | (number or string) | N
 `"number"` | (number string) | N
-`"page` | (string) | N
+`"page"` | (string) | N
 
 ### Multimedia Object
 
