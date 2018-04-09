@@ -28,6 +28,8 @@ Property | Description | Required
 
 ### Meta Object
 
+Fields should be largely self-explanatory.
+
 Property | Description | Required
 ---------|-------------|---------
 `"title"` | (string) | N
@@ -36,6 +38,8 @@ Property | Description | Required
 `"difficulty"`|Estimate of difficulty (number between 1 and 5 inclusive)|N
 `"source"` | (string) | N
 `"venue"` | (string) | N
+`"audience"` | (string) | N
+`"context"` | (string) | N
 `"keywords"` | Short tags for categorizing this set (array of strings) |N
 `"authors"` | (array of strings or person objects - see below) | N
 `"creationDate"` | (string - YYYY-MM-DD) | N
@@ -138,7 +142,7 @@ Property | Description | Required
 `"type"` | `"image"` or `"audio"` | Y
 `"label"` | Application dependent. Can be used as a caption, for example. (string) | N
 `"sources"` | If there are multiple sources all should represent the same image or audio. The user agent should pick the best one (array of source objects - see below) | Y
-`"annoation"` | (annotation object - see below) | N
+`"annotation"` | (annotation object - see below) | N
 
 ### Source Object
 

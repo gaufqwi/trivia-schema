@@ -19,6 +19,8 @@
         "description": {"type": "string"},
         "source": {"type": "string"},
         "venue": {"type": "string"},
+        "audience": {"type": "string"},
+        "context": {"type": "string"},
         "category": {
           "oneOf": [
             {"type": "string"},
